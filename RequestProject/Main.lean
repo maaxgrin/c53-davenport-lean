@@ -19,7 +19,6 @@ copies of the cyclic group of order n.
 - **Lemma 1** (`local_estimate`): For every prime p and k ≥ 3p − 2, Dₖ(C₃ᵖ) ≤ pk + p²
 - **Theorem 1** (`D_upper_bound`): D(C₃ⁿ) ≤ 4n − P(n) − 2 for n ≥ 2
 - **Corollary** (`C53_le_4`): C₅₃ ≤ 4
-- **Remark 1** (`remark_pointwise`): Generalized inductive step with abstract local bound Aₚ
 
 ## References
 
@@ -350,26 +349,3 @@ and concludes C₅₃ = sup_{n≥2} (D(C₃ⁿ) − 1)/(n − 1) ≤ 4.
 theorem C53_le_4 (n : ℕ) (hn : n ≥ 2) : D n + 3 ≤ 4 * n := by
   have := D_upper_bound n hn;
   linarith [ P_ge_two hn ]
-
-/-! ## Remark 1: Pointwise refinement -/
-
-/-
-**Remark 1 (from "Remark 1" section): Pointwise refinement.**
-If a sharper local bound Dₖ(C₃ᵖ) ≤ pk + Aₚ is available for all primes p
-(in the range k ≥ 3p − 2), then the single inductive step yields
-D(q · m) ≤ q · D(m) + Aq.
-That is, D(q · m) ≤ q · D(m) + A from the inductive inequality
-D(q · m) ≤ D_{D(m)}(q) ≤ q · D(m) + A.
-
-The uniform C₅₃ ≤ 4 bound follows from the coarse choice Aₚ = p², but any
-improvement in the local constants Aₚ immediately yields a sharper pointwise
-estimate for D(C₃ⁿ).
-
-This lemma formalizes the generalized inductive step: given an abstract bound
-A for Dₖ(C₃^q) ≤ q · k + A (for k ≥ 3q−2), D(q · m) ≤ q · D(m) + A.
--/
-theorem remark_pointwise (q m A : ℕ) (hq : q.Prime) (hm : m ≥ q)
-    (hA : ∀ k, k ≥ 3 * q - 2 → Dk k q ≤ q * k + A) :
-    D (q * m) ≤ q * D m + A := by
-  refine' le_trans ( inductive_inequality _ _ ) ( hA _ _ );
-  exact le_trans ( by omega ) ( D_lower_bound m ( by linarith [ hq.two_le ] ) )
