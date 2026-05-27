@@ -16,6 +16,9 @@ S := sup_{n >= 2} (D(C_n^3) - 1)/(n - 1) <= 4.
 The proof was discovered with assistance from GPT-5.5 Pro. The Lean
 formalization was prepared with assistance from Aristotle and GPT-5.5 Pro.
 
+The corresponding optimization-problems entry is:
+https://teorth.github.io/optimizationproblems/constants/53a.html
+
 ## Files
 
 - [`davenport_cn3_bound.pdf`](davenport_cn3_bound.pdf):
